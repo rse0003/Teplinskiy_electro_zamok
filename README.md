@@ -10,6 +10,9 @@ arduino UNO
 акамулятор
 сервомотор
 
+![изображение](https://github.com/user-attachments/assets/d722a3ed-3f78-4dc9-87af-8fe093995aaa)
+
+
 
 состояния
 открыто
