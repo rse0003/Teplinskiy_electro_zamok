@@ -40,14 +40,17 @@ void servoclouse(){
 void servoopen(){
     servo1.write(180);
 //серво открыть 
-
-void cart(){
 //проверить карту
+int pass=1234;
+void cart(){
+
     // сброс цикла, если на считывателе нет карты
   if ( ! mfrc522.PICC_IsNewCardPresent()) { return; }
   if ( ! mfrc522.PICC_ReadCardSerial()) { return; }
   // вывод информации о карте на монитор порта
   mfrc522.PICC_DumpToSerial(&(mfrc522.uid));
+  
+
 }
 void debug (long a) {
     Serial.println(a);
@@ -60,12 +63,33 @@ void setup() {
   servo1.attach(11);  // привязываем сервопривод к аналоговому выходу 11 [4](https://xn--18-6kcdusowgbt1a4b.xn--p1ai/%D1%81%D0%B5%D1%80%D0%B2%D0%BE%D0%BF%D1%80%D0%B8%D0%B2%D0%BE%D0%B4-%D0%B0%D1%80%D0%B4%D1%83%D0%B8%D0%BD%D0%BE/)
 
   //------------------
+ void setup () {
+  int s=0
 }
 
 void loop() {
-  servoopen(2)
-} 
+  //тригеры
 
-void loop() {
-  servoclose(2)
+
+  //реакции
+  //0. ждет
+  if s==0(){
+
+  } 
+    //закрыто
+  if s==1(){
+    cart();
+  }
+
+  if s==2(){
+    //открыто
+  }
+
+  if s==3(){
+//разряжена
+  }
+
+
+
+
 } 
