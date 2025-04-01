@@ -21,6 +21,8 @@ void setup() {
 
 
 
+//1 горит
+//0 не горит
 
 void lamp(int a){
 //сигнал лампа 
@@ -32,14 +34,19 @@ void lamp(int a){
     delay(100);  // ждём секунду
   }
 }
-void servoclouse(){
+
 //серво закрыть 
+void zamokZakr(){
+
   servo1.write(0);
 
 }
-void servoopen(){
-    servo1.write(180);
+
+
 //серво открыть 
+void zamokOtkr(){
+    servo1.write(180);
+}
 //проверить карту
 int pass=1234;
 void cart(){
@@ -48,8 +55,11 @@ void cart(){
   if ( ! mfrc522.PICC_IsNewCardPresent()) { return; }
   if ( ! mfrc522.PICC_ReadCardSerial()) { return; }
   // вывод информации о карте на монитор порта
-  mfrc522.PICC_DumpToSerial(&(mfrc522.uid));
-  
+  cData=mfrc522.PICC_DumpToSerial(&(mfrc522.uid));
+  parol=12345678
+  if (cData==parol){
+    return True;
+  }
 
 }
 void debug (long a) {
@@ -67,22 +77,44 @@ void setup() {
   int s=0
 }
 
+int per=0;
+
+//0-закрыт
+//1-открыт
 void loop() {
   //тригеры
-
+  if (cart()==True){
+    if (per==0){
+      s=1;
+      per=1;
+      f=0;
+    } else {
+      s=2;
+      per=0; 
+      f=0;
+    }
+  }
 
   //реакции
   //0. ждет
   if s==0(){
-
+    cart()
+    
   } 
     //закрыто
-  if s==1(){
-    cart();
+  if s==1(){   
+    if f==0 {
+     zamokZakr();
+     lamp(1);
+     f=1;
+   }
   }
-
-  if s==2(){
-    //открыто
+//открыто
+  if s==2(){   
+    if f==0 {
+     zamokOtkr();
+     lamp(0)
+     f=1;
   }
 
   if s==3(){
