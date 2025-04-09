@@ -4,6 +4,9 @@ Servo servo1;  // объявляем переменную servo типа «servo
 #include "SPI.h"
 #include "MFRC522.h"
 
+#include <Analog.h>
+
+
 #define RST_PIN 9  // RES pin
 #define SS_PIN 10  // SDA (SS) pin
 
@@ -66,6 +69,17 @@ void debug (long a) {
     Serial.println(a);
 }          
 
+
+void zamer(){
+   int bat = analogRead(A1);
+  float voltage = bat * (5.0 / 1023.0) * 3.0; // Рассчитываем напряжение 
+  float bat_proc=(10-voltage)/0.03;
+  Serial.print("Напряжение аккумулятора: "); 
+  Serial.print(bat_proc); 
+  Serial.println(" %");
+   delay(1000);
+}
+
 void setup() {
     Serial.begin(9600);
   pinMode(13, OUTPUT);
@@ -73,53 +87,59 @@ void setup() {
   servo1.attach(11);  // привязываем сервопривод к аналоговому выходу 11 [4](https://xn--18-6kcdusowgbt1a4b.xn--p1ai/%D1%81%D0%B5%D1%80%D0%B2%D0%BE%D0%BF%D1%80%D0%B8%D0%B2%D0%BE%D0%B4-%D0%B0%D1%80%D0%B4%D1%83%D0%B8%D0%BD%D0%BE/)
 
   //------------------
- void setup () {
   int s=0
 }
-
+//настройка переключателязамка
 int per=0;
 
 //0-закрыт
 //1-открыт
 void loop() {
   //тригеры
-  if (cart()==True){
-    if (per==0){
-      s=1;
-      per=1;
-      f=0;
-    } else {
-      s=2;
-      per=0; 
-      f=0;
+ 
+  //реакции
+  //0. ждет
+
+   if (s==0){
+    zamer();
+    if(bat_proc<10){
+      s=3;
+    }
+    if (cart()==True){
+      if (per==0){
+        s=2;
+        per=1;
+      } else {
+        s=3;
+        per=0; 
+      }
     }
   }
 
-  //реакции
-  //0. ждет
-  if s==0(){
-    cart()
-    
-  } 
     //закрыто
-  if s==1(){   
-    if f==0 {
+  if (s==1){   
      zamokZakr();
      lamp(1);
-     f=1;
+     s=0;
    }
   }
 //открыто
-  if s==2(){   
-    if f==0 {
+  if (s==2){   
      zamokOtkr();
      lamp(0)
-     f=1;
+     s=0;
   }
 
-  if s==3(){
-//разряжена
-  }
+  if (s==3){
+     if (bat_prot>95){
+      lamp(1);
+      delay(100);
+      lamp(0)
+      s=1;
+     }
+  }  
+
+
 
 
 
