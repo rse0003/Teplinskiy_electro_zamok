@@ -1,3 +1,10 @@
+//mosi-10
+//ssk-9
+//irq-12
+//nss-11
+
+
+
 #include <Servo.h>  // подключаем библиотеку для работы с сервоприводом [4](https://xn--18-6kcdusowgbt1a4b.xn--p1ai/%D1%81%D0%B5%D1%80%D0%B2%D0%BE%D0%BF%D1%80%D0%B8%D0%B2%D0%BE%D0%B4-%D0%B0%D1%80%D0%B4%D1%83%D0%B8%D0%BD%D0%BE/)
 Servo servo1;  // объявляем переменную servo типа «servo1» [4](https://xn--18-6kcdusowgbt1a4b.xn--p1ai/%D1%81%D0%B5%D1%80%D0%B2%D0%BE%D0%BF%D1%80%D0%B8%D0%B2%D0%BE%D0%B4-%D0%B0%D1%80%D0%B4%D1%83%D0%B8%D0%BD%D0%BE/)
 
